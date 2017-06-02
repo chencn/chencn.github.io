@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[解决oracle 1521端口,本机127.0.0.1可通,其他ip不通]]></title>
+    <url>%2F2017%2F06%2F02%2F2017-06-02-001%2F</url>
+    <content type="text"><![CDATA[问题我的环境是oracle11gr2，本地用plsql还是toad连接都没有任何问题，而用别的机器远程连接就提示 无监听程序等错误。 原因oracle安装路径 — 例如：F:\app\Administrator\product\11.2.0\dbhome_1\NETWORK\ADMIN下面的listener.ora和tnsnames.ora这两个文件 打开看一下 数据库时，本地可以连，而远程连接不了！ 解决办法将上面两个文件中 高亮的localhost全部替换成本机的计算机名。 然后重新启动oralce服务 和监听就可以了。]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>Oracle</category>
+      </categories>
+      <tags>
+        <tag>Oracle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2017%2F05%2F31%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+</search>
