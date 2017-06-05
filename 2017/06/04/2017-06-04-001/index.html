@@ -97,12 +97,12 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/04/2017-06-04-001/index.html">
 <meta property="og:site_name" content="XQChen&#39;s Blog">
 <meta property="og:description" content="前言有这么一段代码：123456789public class TestMain&amp;#123;    public static void main(String[] args)    &amp;#123;        String str0 = &quot;123&quot;;        String str1 = &quot;123&quot;;        System.out.println(str0 == str1);    &amp;">
-<meta property="og:image" content="http://images2015.cnblogs.com/blog/801753/201509/801753-20150927104320100-210008.jpg">
-<meta property="og:updated_time" content="2017-06-05T03:25:05.194Z">
+<meta property="og:image" content="http://yoursite.com/images/2017-06-04-001/001.jpg">
+<meta property="og:updated_time" content="2017-06-05T06:50:49.142Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从为什么 String=String 谈到 StringBuilder 和 StringBuffer">
 <meta name="twitter:description" content="前言有这么一段代码：123456789public class TestMain&amp;#123;    public static void main(String[] args)    &amp;#123;        String str0 = &quot;123&quot;;        String str1 = &quot;123&quot;;        System.out.println(str0 == str1);    &amp;">
-<meta name="twitter:image" content="http://images2015.cnblogs.com/blog/801753/201509/801753-20150927104320100-210008.jpg">
+<meta name="twitter:image" content="http://yoursite.com/images/2017-06-04-001/001.jpg">
 
 
 
@@ -415,7 +415,7 @@
 </li>
 </ol>
 <p>栈有一个特点，就是<strong>数据共享</strong>。回到我们第一个例子，第五行String str0 = “123″，编译的时候，在常量池中创建了一个常量”123″，然后走第六行String str1 = “123″，先去常量池中找有没有这个”123″，发现有，str1也指向常量池中的”123″，所以第七行的str0 == str1返回的是true，因为str0和str1指向的都是常量池中的”123″这个字符串的地址。当然如果String str1 = “234″，就又不一样了，因为常量池中没有”234″，所以会在常量池中创建一个”234″，然后str1代表的是这个”234″的地址。分析了String，其实其他基本数据类型也都是一样的：<strong>先看常量池中有没有要创建的数据，有就返回数据的地址，没有就创建一个。</strong></p>
-<p>第二个例子呢？Java虚拟机的解释器每遇到一个new关键字，都会在堆内存中开辟一块内存来存放一个String对象，所以str2、str3指向的堆内存中虽然存储的是相等的”234″，但是由于是两块不同的堆内存，因此str2 == str3返回的仍然是false，网上找到一张图表示一下这个概念：<br> <img src="http://images2015.cnblogs.com/blog/801753/201509/801753-20150927104320100-210008.jpg" alt=""></p>
+<p>第二个例子呢？Java虚拟机的解释器每遇到一个new关键字，都会在堆内存中开辟一块内存来存放一个String对象，所以str2、str3指向的堆内存中虽然存储的是相等的”234″，但是由于是两块不同的堆内存，因此str2 == str3返回的仍然是false，网上找到一张图表示一下这个概念：<br> <img src="/images/2017-06-04-001/001.jpg" alt=""></p>
 <h2 id="为什么要使用StringBuilder和StringBuffer拼接字符串？"><a href="#为什么要使用StringBuilder和StringBuffer拼接字符串？" class="headerlink" title="为什么要使用StringBuilder和StringBuffer拼接字符串？"></a>为什么要使用StringBuilder和StringBuffer拼接字符串？</h2><p> 大家在开发中一定有一个原则是”利用StringBuilder和StringBuffer拼接字符串”，但是为什么呢？用一段代码来分析一下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringTest</span> </span>&#123;</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testStringPlus</span><span class="params">()</span> </span>&#123;</div><div class="line">        String str = <span class="string">"111"</span>;</div><div class="line">        str += <span class="string">"222"</span>;</div><div class="line">        str += <span class="string">"333"</span>;</div><div class="line">        System.out.println(str);</div><div class="line">    &#125;    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这段代码，我们找到编译后的StringTest.class文件，使用”javap -verbose StringTest”或者”javap -c StringTest”都可以，反编译一下class获取到对应的字节码：</p>
