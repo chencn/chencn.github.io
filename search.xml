@@ -16,7 +16,7 @@
   <entry>
     <title><![CDATA[使用maven创建web项目]]></title>
     <url>%2F2017%2F06%2F05%2F2017-06-05-002%2F</url>
-    <content type="text"><![CDATA[首先新建一个maven项目，看图： ##按照以上步骤就可以创建一个maven项目，可以看到最下图的目录结构**，但是这样的目录结构是不对的，需要做一些修改。 首先为了避免乱码，我们应该将项目编码换成UTF-8，以后项目编码都采用UTF-8，加个字符编码过滤器，乱码就不再“乱”了（不表示没有，但是比较容易解决）。 再次，按照以下图解来进行操作（设置JRE为默认的），这样就会出现完整的、正确的目录结构 最后，还有个index.jsp报错，我们需要引入Java ee的jar包即可。在pom.xml中引入： 123456&lt;!-- 导入java ee jar 包 --&gt; &lt;dependency&gt; &lt;groupId&gt;javax&lt;/groupId&gt; &lt;artifactId&gt;javaee-api&lt;/artifactId&gt; &lt;version&gt;7.0&lt;/version&gt; &lt;/dependency&gt; 至此，完整的目录结构以及正确的项目搞定了。接下来再进行一些配置，毕竟是web项目，需要jstl等等，配置如下： 注 关于报错 cannot change version web module 3.0 请参阅 百度经验]]></content>
+    <content type="text"><![CDATA[首先新建一个maven项目，看图： ##按照以上步骤就可以创建一个maven项目，可以看到最下图的目录结构**，但是这样的目录结构是不对的，需要做一些修改。 首先为了避免乱码，我们应该将项目编码换成UTF-8，以后项目编码都采用UTF-8，加个字符编码过滤器，乱码就不再“乱”了（不表示没有，但是比较容易解决）。 再次，按照以下图解来进行操作（设置JRE为默认的），这样就会出现完整的、正确的目录结构 最后，还有个index.jsp报错，我们需要引入Java ee的jar包即可。在pom.xml中引入： 123456&lt;!-- 导入java ee jar 包 --&gt; &lt;dependency&gt; &lt;groupId&gt;javax&lt;/groupId&gt; &lt;artifactId&gt;javaee-api&lt;/artifactId&gt; &lt;version&gt;7.0&lt;/version&gt; &lt;/dependency&gt; 至此，完整的目录结构以及正确的项目搞定了。接下来再进行一些配置，毕竟是web项目，需要jstl等等，配置如下： 注: 如果报错 cannot change version web module 3.0 请参阅 百度经验]]></content>
       <categories>
         <category>Java</category>
       </categories>
