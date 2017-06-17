@@ -1,0 +1,1313 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java,spring," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="SPRING 教程IOC/DISpring是一个基于IOC和AOP的结构J2EE系统的框架IOC 反转控制 是Spring的基础，Inversion Of Control简单说就是创建对象由以前的程序员自己new 构造方法来调用，变成了交由Spring创建对象DI 依赖注入 Dependency Inject. 简单地说就是拿到的对象的属性，已经被注入好相关值了，直接使用即可 pojo准备pojo">
+<meta name="keywords" content="Java,spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SPRING 教程">
+<meta property="og:url" content="http://yoursite.com/2017/06/13/2017-06-17-spring/index.html">
+<meta property="og:site_name" content="XQChen&#39;s Blog">
+<meta property="og:description" content="SPRING 教程IOC/DISpring是一个基于IOC和AOP的结构J2EE系统的框架IOC 反转控制 是Spring的基础，Inversion Of Control简单说就是创建对象由以前的程序员自己new 构造方法来调用，变成了交由Spring创建对象DI 依赖注入 Dependency Inject. 简单地说就是拿到的对象的属性，已经被注入好相关值了，直接使用即可 pojo准备pojo">
+<meta property="og:image" content="http://stepimage.how2j.cn/214.png">
+<meta property="og:image" content="http://stepimage.how2j.cn/1876.png">
+<meta property="og:image" content="http://stepimage.how2j.cn/217.png">
+<meta property="og:image" content="http://stepimage.how2j.cn/4077.png">
+<meta property="og:image" content="http://stepimage.how2j.cn/4078.png">
+<meta property="og:image" content="http://stepimage.how2j.cn/4079.png">
+<meta property="og:image" content="http://stepimage.how2j.cn/4083.png">
+<meta property="og:image" content="http://stepimage.how2j.cn/1878.png">
+<meta property="og:image" content="http://stepimage.how2j.cn/1863.png">
+<meta property="og:image" content="http://stepimage.how2j.cn/221.png">
+<meta property="og:image" content="http://stepimage.how2j.cn/4087.png">
+<meta property="og:image" content="http://stepimage.how2j.cn/4489.png">
+<meta property="og:updated_time" content="2017-06-17T15:20:56.324Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SPRING 教程">
+<meta name="twitter:description" content="SPRING 教程IOC/DISpring是一个基于IOC和AOP的结构J2EE系统的框架IOC 反转控制 是Spring的基础，Inversion Of Control简单说就是创建对象由以前的程序员自己new 构造方法来调用，变成了交由Spring创建对象DI 依赖注入 Dependency Inject. 简单地说就是拿到的对象的属性，已经被注入好相关值了，直接使用即可 pojo准备pojo">
+<meta name="twitter:image" content="http://stepimage.how2j.cn/214.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/13/2017-06-17-spring/"/>
+
+
+
+
+
+  <title>SPRING 教程 | XQChen's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XQChen's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/13/2017-06-17-spring/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xqchen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XQChen's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SPRING 教程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-13T00:00:00+08:00">
+                2017-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/06/13/2017-06-17-spring/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="SPRING-教程"><a href="#SPRING-教程" class="headerlink" title="SPRING 教程"></a>SPRING 教程</h1><h2 id="IOC-DI"><a href="#IOC-DI" class="headerlink" title="IOC/DI"></a>IOC/DI</h2><p>Spring是一个基于IOC和AOP的结构J2EE系统的框架<br>IOC 反转控制 是Spring的基础，Inversion Of Control<br>简单说就是创建对象由以前的程序员自己new 构造方法来调用，变成了交由Spring创建对象<br>DI 依赖注入 Dependency Inject. 简单地说就是拿到的对象的属性，已经被注入好相关值了，直接使用即可</p>
+<h3 id="pojo"><a href="#pojo" class="headerlink" title="pojo"></a>pojo</h3><p>准备pojo Category，用来演示IOC和DI</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.xqchen.pojo;</div><div class="line"> </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Category</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.id = id;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="applicationContext-xml"><a href="#applicationContext-xml" class="headerlink" title="applicationContext.xml"></a>applicationContext.xml</h3><p>在src目录下新建applicationContext.xml文件<br>applicationContext.xml是Spring的核心配置文件，通过关键字c即可获取Category对象，该对象获取的时候，即被注入了字符串”category 1“到name属性中</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">    <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></div><div class="line">    <span class="attr">xmlns:tx</span>=<span class="string">"http://www.springframework.org/schema/tx"</span></div><div class="line">    <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></div><div class="line">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"</span></div><div class="line">   http://www.springframework.org/schema/beans </div><div class="line">   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/aop </div><div class="line">   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/tx </div><div class="line">   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/context      </div><div class="line">   http://www.springframework.org/schema/context/spring-context-3.0.xsd"&gt;</div><div class="line">  <span class="comment">&lt;!--注入的bean --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">"c"</span> <span class="attr">class</span>=<span class="string">"com.xqchen.pojo.Category"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"category 1"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line">  </div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="TestSpring"><a href="#TestSpring" class="headerlink" title="TestSpring"></a>TestSpring</h3><p>测试代码，演示通过spring获取Category对象，以及该对象被注入的name属性。<br>如图所示，可以打印出通过Spring拿到的Category对象的name属性<br><img src="http://stepimage.how2j.cn/214.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.xqchen.test;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</div><div class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> com.xqchen.pojo.Category;</div><div class="line"> </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSpring</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(</div><div class="line">                <span class="keyword">new</span> String[] &#123; <span class="string">"applicationContext.xml"</span> &#125;);</div><div class="line"> </div><div class="line">        Category c = (Category) context.getBean(<span class="string">"c"</span>);</div><div class="line">         </div><div class="line">        System.out.println(c.getName());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="原理图"><a href="#原理图" class="headerlink" title="原理图"></a>原理图</h3><p>以获取对象的方式来进行比较</p>
+<p><strong>传统的方式：</strong><br>通过new 关键字主动创建一个对象<br><strong>IOC方式</strong><br>对象的生命周期由Spring来管理，直接从Spring那里去获取一个对象。 IOC是<strong>反转控制</strong> (Inversion Of Control)的缩写，就像控制权从本来在自己手里，交给了Spring。 </p>
+<p>打个比喻：<br><strong>传统方式</strong>：相当于你自己去菜市场new 了一直鸡，但是是生鸡，要自己拔毛，去内脏，再上花椒，酱油，烤制，经过各种工序之后，才可以食用。<br><strong>用 IOC</strong>：相当于去馆子(Spring)点了一直 鸡，交到你手上的时候，已经五味俱全，你就只管吃就行了。<br><img src="http://stepimage.how2j.cn/1876.png" alt=""></p>
+<h2 id="注入对象"><a href="#注入对象" class="headerlink" title="注入对象"></a>注入对象</h2><p>在上例中，对Category的name属性注入了”category 1”字符串<br>在本例中 ，对Product对象，注入一个Category对象</p>
+<h3 id="Product-java"><a href="#Product-java" class="headerlink" title="Product.java"></a>Product.java</h3><p>Product类中有对Category对象的setter getter<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.xqchen.pojo;</div><div class="line"> </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Product</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> Category category;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.id = id;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> Category <span class="title">getCategory</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> category;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCategory</span><span class="params">(Category category)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.category = category;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="applicationContext-xml-1"><a href="#applicationContext-xml-1" class="headerlink" title="applicationContext.xml"></a>applicationContext.xml</h3><p>在创建Product的时候注入一个Category对象<br>注意，这里要使用ref来注入另一个对象</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></div><div class="line">    <span class="attr">xmlns:tx</span>=<span class="string">"http://www.springframework.org/schema/tx"</span> <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></div><div class="line">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"</span></div><div class="line">   http://www.springframework.org/schema/beans </div><div class="line">   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/aop </div><div class="line">   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/tx </div><div class="line">   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/context      </div><div class="line">   http://www.springframework.org/schema/context/spring-context-3.0.xsd"&gt;</div><div class="line"> </div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">"c"</span> <span class="attr">class</span>=<span class="string">"com.xqchen.pojo.Category"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"category 1"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">"p"</span> <span class="attr">class</span>=<span class="string">"com.xqchen.pojo.Product"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"product1"</span> /&gt;</span></div><div class="line">       <span class="comment">&lt;!-- --&gt;</span> </div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"category"</span> <span class="attr">ref</span>=<span class="string">"c"</span> /&gt;</span></div><div class="line">        </div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="TestSpring-1"><a href="#TestSpring-1" class="headerlink" title="TestSpring"></a>TestSpring</h3><p>通过Spring拿到的Product对象已经被注入了Category对象了<br><img src="http://stepimage.how2j.cn/217.png" alt=""></p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">package</span> com.xqchen.test;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</div><div class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> com.xqchen.pojo.Product;</div><div class="line"> </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSpring</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="keyword">new</span> String[] &#123; <span class="string">"applicationContext.xml"</span> &#125;);</div><div class="line"> </div><div class="line">        Product p = (Product) context.getBean(<span class="string">"p"</span>);</div><div class="line"> </div><div class="line">        System.out.println(p.getName());</div><div class="line">        System.out.println(p.getCategory().getName());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="注解方式-IOC-DI"><a href="#注解方式-IOC-DI" class="headerlink" title="注解方式 IOC/DI"></a>注解方式 IOC/DI</h2><h3 id="修改applicationContext-xml"><a href="#修改applicationContext-xml" class="headerlink" title="修改applicationContext.xml"></a>修改applicationContext.xml</h3><ol>
+<li>添加</li>
+</ol>
+<figure class="highlight plain"><figcaption><span>```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"> </div><div class="line"></div><div class="line">表示告诉Spring要用注解的方式进行配置</div><div class="line"></div><div class="line">2. 注入对象category 注释掉，这个行为在后面将使用注解来完成</div><div class="line"></div><div class="line">```java</div><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</div><div class="line">    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</div><div class="line">    xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot; xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</div><div class="line">    xsi:schemaLocation=&quot;</div><div class="line">   http://www.springframework.org/schema/beans </div><div class="line">   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/aop </div><div class="line">   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/tx </div><div class="line">   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/context      </div><div class="line">   http://www.springframework.org/schema/context/spring-context-3.0.xsd&quot;&gt;</div><div class="line">  </div><div class="line">    &lt;context:annotation-config/&gt;</div><div class="line">    &lt;bean name=&quot;c&quot; class=&quot;com.xqchen.pojo.Category&quot;&gt;</div><div class="line">        &lt;property name=&quot;name&quot; value=&quot;category 1&quot; /&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">    &lt;bean name=&quot;p&quot; class=&quot;com.xqchen.pojo.Product&quot;&gt;</div><div class="line">        &lt;property name=&quot;name&quot; value=&quot;product1&quot; /&gt;</div><div class="line">&lt;!--         &lt;property name=&quot;category&quot; ref=&quot;c&quot; /&gt; --&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">  </div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure>
+<h3 id="Autowired"><a href="#Autowired" class="headerlink" title="@Autowired"></a>@Autowired</h3><p>在Product.java的category属性前加上@Autowired注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Autowired</span></div><div class="line"><span class="keyword">private</span> Category category;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.xqchen.pojo;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"> </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Product</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> Category category;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.id = id;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> Category <span class="title">getCategory</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> category;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCategory</span><span class="params">(Category category)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.category = category;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h3><p><img src="http://stepimage.how2j.cn/4077.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.xqchen.test;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</div><div class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> com.xqchen.pojo.Product;</div><div class="line"> </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSpring</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="keyword">new</span> String[] &#123; <span class="string">"applicationContext.xml"</span> &#125;);</div><div class="line">        Product p = (Product) context.getBean(<span class="string">"p"</span>);</div><div class="line">        System.out.println(p.getName());</div><div class="line">        System.out.println(p.getCategory().getName());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Autowired的位置"><a href="#Autowired的位置" class="headerlink" title="@Autowired的位置"></a>@Autowired的位置</h3><p>除了前面的 <strong>在属性前加上@Autowired</strong> 这种方式外，也可以在setCategory方法前加上@Autowired，这样来达到相同的效果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Autowired</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCategory</span><span class="params">(Category category)</span></span></div></pre></td></tr></table></figure>
+<p><img src="http://stepimage.how2j.cn/4078.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.xqchen.pojo;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"> </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Product</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">     </div><div class="line">    <span class="keyword">private</span> Category category;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.id = id;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> Category <span class="title">getCategory</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> category;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCategory</span><span class="params">(Category category)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.category = category;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Resource"><a href="#Resource" class="headerlink" title="@Resource"></a>@Resource</h3><p>除了@Autowired之外，@Resource也是常用的手段</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Resource</span>(name=<span class="string">"c"</span>)</div><div class="line"><span class="keyword">private</span> Category category;</div></pre></td></tr></table></figure>
+<p><img src="http://stepimage.how2j.cn/4079.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.xqchen.pojo;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> javax.annotation.Resource;</div><div class="line"> </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Product</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="meta">@Resource</span>(name=<span class="string">"c"</span>)</div><div class="line">    <span class="keyword">private</span> Category category;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.id = id;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> Category <span class="title">getCategory</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> category;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCategory</span><span class="params">(Category category)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.category = category;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="对Bean的注解"><a href="#对Bean的注解" class="headerlink" title="对Bean的注解"></a>对Bean的注解</h3><p>上述例子是对<strong>注入对象行为</strong>的注解，那么bean对象本身，比如Category,Product可不可以移出applicationContext.xml配置文件，也通过注解进行呢？<br>接下来就讲解如何对Bean进行注解配置</p>
+<h3 id="applicationContext-xml-2"><a href="#applicationContext-xml-2" class="headerlink" title="applicationContext.xml"></a>applicationContext.xml</h3><p>修改applicationContext.xml，什么都去掉，只新增：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;context:component-scan base-<span class="keyword">package</span>=<span class="string">"com.xqchen.pojo"</span>/&gt;</div></pre></td></tr></table></figure>
+<p>其作用是告诉Spring，bean都放在com.xqchen.pojo这个包下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line">&lt;beans xmlns="http://www.springframework.org/schema/beans"</div><div class="line">    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"</div><div class="line">    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"</div><div class="line">    xsi:schemaLocation="</div><div class="line">   http://www.springframework.org/schema/beans </div><div class="line">   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/aop </div><div class="line">   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/tx </div><div class="line">   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/context      </div><div class="line">   http://www.springframework.org/schema/context/spring-context-3.0.xsd"&gt;</div><div class="line">  </div><div class="line">    &lt;context:component-scan base-package="com.xqchen.pojo"/&gt;</div><div class="line">     </div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure>
+<h3 id="Component"><a href="#Component" class="headerlink" title="@Component"></a>@Component</h3><p>为Product类加上@Component注解，即表明此类是bean</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(<span class="string">"p"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Product</span> </span>&#123;</div></pre></td></tr></table></figure>
+<p> 为Category 类加上@Component注解，即表明此类是bean</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"> <span class="meta">@Component</span>(<span class="string">"c"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Category</span> </span>&#123;</div></pre></td></tr></table></figure>
+<p>另外，因为配置从applicationContext.xml中移出来了，所以属性初始化放在属性声明上进行了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> String name=<span class="string">"product 1"</span>;</div><div class="line"><span class="keyword">private</span> String name=<span class="string">"category 1"</span>;</div></pre></td></tr></table></figure>
+<p>Product.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.xqchen.pojo;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> javax.annotation.Resource;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</div><div class="line"> </div><div class="line"><span class="meta">@Component</span>(<span class="string">"p"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Product</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line">    <span class="keyword">private</span> String name=<span class="string">"product 1"</span>;</div><div class="line">     </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> Category category;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.id = id;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> Category <span class="title">getCategory</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> category;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCategory</span><span class="params">(Category category)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.category = category;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Category.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.xqchen.pojo;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</div><div class="line"> </div><div class="line"><span class="meta">@Component</span>(<span class="string">"c"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Category</span> </span>&#123;</div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.id = id;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line">    <span class="keyword">private</span> String name=<span class="string">"category 1"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="运行测试-1"><a href="#运行测试-1" class="headerlink" title="运行测试"></a>运行测试</h3><p><img src="http://stepimage.how2j.cn/4083.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.xqchen.test;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</div><div class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> com.xqchen.pojo.Product;</div><div class="line"> </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSpring</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="keyword">new</span> String[] &#123; <span class="string">"applicationContext.xml"</span> &#125;);</div><div class="line">        Product p = (Product) context.getBean(<span class="string">"p"</span>);</div><div class="line">        System.out.println(p.getName());</div><div class="line">        System.out.println(p.getCategory().getName());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="AOP-面向切面编程"><a href="#AOP-面向切面编程" class="headerlink" title="AOP 面向切面编程"></a>AOP 面向切面编程</h2><p>AOP 即 Aspect Oriental Program 面向切面编程<br>首先，在面向切面编程的思想里面，把功能分为<strong>核心业务功能</strong>，和<strong>周边功能</strong>。<br>所谓的核心业务，比如登陆，增加数据，删除数据都叫核心业务<br>所谓的周边功能，比如性能统计，日志，事务管理等等 </p>
+<p>周边功能在Spring的变相切面编程AOP思想里，即被定义为<strong>切面</strong>     </p>
+<p>在面向切面编程AOP的思想里面，核心业务功能和切面功能分别<strong>独立进行开发 </strong><br>然后把切面功能和核心业务功能 <strong>“编织”</strong> 在一起，这就叫AOP</p>
+<h2 id="思路图"><a href="#思路图" class="headerlink" title="思路图"></a>思路图</h2><ol>
+<li>功能分两大类，辅助功能和核心业务功能</li>
+<li>辅助功能和核心业务功能彼此独立进行开发</li>
+<li>比如登陆功能，即便是没有性能统计和日志输出，也可以正常运行</li>
+<li>如果有需要，就把”日志输出” 功能和 “登陆” 功能 编织在一起，这样登陆的时候，就可以看到日志输出了</li>
+<li>辅助功能，又叫做切面，这种能够选择性的，低耦合的把切面和核心业务功能结合在一起的编程思想，就叫做切面编程<br><img src="http://stepimage.how2j.cn/1878.png" alt=""></li>
+</ol>
+<h3 id="准备业务类-ProductService"><a href="#准备业务类-ProductService" class="headerlink" title="准备业务类 ProductService"></a>准备业务类 ProductService</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.xqchen.service;</div><div class="line"> </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductService</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomeService</span><span class="params">()</span></span>&#123;</div><div class="line">         </div><div class="line">        System.out.println(<span class="string">"doSomeService"</span>);</div><div class="line">         </div><div class="line">    &#125;</div><div class="line">     </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="TestSpring-2"><a href="#TestSpring-2" class="headerlink" title="TestSpring"></a>TestSpring</h3><p>在引入切面之前，调用该业务类</p>
+<p><img src="http://stepimage.how2j.cn/1863.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.xqchen.test;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</div><div class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> com.xqchen.service.ProductService;</div><div class="line"> </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSpring</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="keyword">new</span> String[] &#123; <span class="string">"applicationContext.xml"</span> &#125;);</div><div class="line">        ProductService s = (ProductService) context.getBean(<span class="string">"s"</span>);</div><div class="line">        s.doSomeService();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="准备日志切面-LoggerAspect"><a href="#准备日志切面-LoggerAspect" class="headerlink" title="准备日志切面 LoggerAspect"></a>准备日志切面 LoggerAspect</h3><p>该日志切面的功能是 在调用核心功能之前和之后分别打印日志，切面就是原理图中讲的那些辅助功能。</p>
+<figure class="highlight plain"><figcaption><span>object = joinPoint.proceed(); ```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">就是将来与某个核心功能编织之后，用于执行核心功能的代码</div><div class="line"></div><div class="line">```java</div><div class="line">package com.xqchen.aspect;</div><div class="line">import org.aspectj.lang.ProceedingJoinPoint;</div><div class="line"> </div><div class="line">public class LoggerAspect &#123; </div><div class="line"> </div><div class="line">    public Object log(ProceedingJoinPoint joinPoint) throws Throwable &#123;</div><div class="line">        System.out.println(&quot;start log:&quot; + joinPoint.getSignature().getName());</div><div class="line">        Object object = joinPoint.proceed();</div><div class="line">        System.out.println(&quot;end log:&quot; + joinPoint.getSignature().getName());</div><div class="line">        return object;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="applicationContext-xml-3"><a href="#applicationContext-xml-3" class="headerlink" title="applicationContext.xml"></a>applicationContext.xml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;bean name=&quot;s&quot; class=&quot;com.xqchen.service.ProductService&quot;&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<p>声明业务对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=&quot;loggerAspect&quot; class=&quot;com.xqchen.aspect.LoggerAspect&quot;/&gt;</div></pre></td></tr></table></figure>
+<p>声明日志切面</p>
+<p>结合思路图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;aop:pointcut id=&quot;loggerCutpoint&quot; </div><div class="line">		expression=</div><div class="line">		&quot;execution(* com.xqchen.service.ProductService.*(..)) &quot;/&gt;</div></pre></td></tr></table></figure>
+<p>指定右边的核心业务功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;aop:aspect id=&quot;logAspect&quot; ref=&quot;loggerAspect&quot;&gt;</div><div class="line">		&lt;aop:around pointcut-ref=&quot;loggerCutpoint&quot; method=&quot;log&quot;/&gt;</div><div class="line">	&lt;/aop:aspect&gt;</div></pre></td></tr></table></figure>
+<p>指定左边的辅助功能<br>然后通过aop:config把业务对象与辅助功能编织在一起。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">execution(* com.xqchen.service.ProductService.*(..))</div></pre></td></tr></table></figure>
+<p>这表示对满足如下条件的方法调用，进行切面操作：<br>返回任意类型<br><strong> com.xqchen.service.ProductService.* </strong> 包名以 <strong> com.xqchen.service.ProductService </strong> 开头的类的任意方法<br>(..) 参数是任意数量和类型</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">    <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></div><div class="line">    <span class="attr">xmlns:tx</span>=<span class="string">"http://www.springframework.org/schema/tx"</span></div><div class="line">    <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></div><div class="line">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"</span></div><div class="line">   http://www.springframework.org/schema/beans </div><div class="line">   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/aop </div><div class="line">   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/tx </div><div class="line">   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/context      </div><div class="line">   http://www.springframework.org/schema/context/spring-context-3.0.xsd"&gt;</div><div class="line">  </div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">"c"</span> <span class="attr">class</span>=<span class="string">"com.xqchen.pojo.Category"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"yyy"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"> </div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">"p"</span> <span class="attr">class</span>=<span class="string">"com.xqchen.pojo.Product"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">value</span>=<span class="string">"product1"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"category"</span> <span class="attr">ref</span>=<span class="string">"c"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line">     </div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">name</span>=<span class="string">"s"</span> <span class="attr">class</span>=<span class="string">"com.xqchen.service.ProductService"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span>    </div><div class="line">     </div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"loggerAspect"</span> <span class="attr">class</span>=<span class="string">"com.xqchen.aspect.LoggerAspect"</span>/&gt;</span></div><div class="line">     </div><div class="line">    <span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">"loggerCutpoint"</span></span></div><div class="line">            <span class="attr">expression</span>=</div><div class="line">            <span class="string">"execution(* com.xqchen.service.ProductService.*(..)) "</span>/&gt;</div><div class="line">             </div><div class="line">        <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">id</span>=<span class="string">"logAspect"</span> <span class="attr">ref</span>=<span class="string">"loggerAspect"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">aop:around</span> <span class="attr">pointcut-ref</span>=<span class="string">"loggerCutpoint"</span> <span class="attr">method</span>=<span class="string">"log"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span>     </div><div class="line">  </div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="TestSpring-3"><a href="#TestSpring-3" class="headerlink" title="TestSpring"></a>TestSpring</h3><p>TestSpring 代码没有发生任何变化，通过配置的方式，把切面和核心业务类编制在了一起。</p>
+<p>运行测试，可以发现在编织之后，业务方法运行之前和之后分别会打印日志</p>
+<p><img src="http://stepimage.how2j.cn/221.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.xqchen.test;</div><div class="line">  </div><div class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</div><div class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> com.xqchen.service.ProductService;</div><div class="line">  </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSpring</span> </span>&#123;</div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(</div><div class="line">                <span class="keyword">new</span> String[] &#123; <span class="string">"applicationContext.xml"</span> &#125;);</div><div class="line">        ProductService s = (ProductService) context.getBean(<span class="string">"s"</span>);</div><div class="line">        s.doSomeService();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="注解方式-AOP"><a href="#注解方式-AOP" class="headerlink" title="注解方式 AOP"></a>注解方式 AOP</h2><p>本章节把XML方式配置AOP 改造为注解方式</p>
+<h3 id="注解配置业务类"><a href="#注解配置业务类" class="headerlink" title="注解配置业务类"></a>注解配置业务类</h3><p>使用@Component(“s”) 注解ProductService 类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.xqchen.service;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</div><div class="line"> </div><div class="line"><span class="meta">@Component</span>(<span class="string">"s"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductService</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomeService</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"doSomeService"</span>);</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注解配置切面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@Aspect 注解表示这是一个切面</div><div class="line">@Component 表示这是一个bean,由Spring进行管理</div><div class="line">@Around(value = &quot;execution(* com.xqchen.service.ProductService.*(..))&quot;) 表示对com.xqchen.service.ProductService 这个类中的所有方法进行切面操作</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.xqchen.aspect;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.ProceedingJoinPoint;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Around;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</div><div class="line"> </div><div class="line"><span class="meta">@Aspect</span></div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoggerAspect</span> </span>&#123; </div><div class="line">     </div><div class="line">    <span class="meta">@Around</span>(value = <span class="string">"execution(* com.xqchen.service.ProductService.*(..))"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">log</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">        System.out.println(<span class="string">"start log:"</span> + joinPoint.getSignature().getName());</div><div class="line">        Object object = joinPoint.proceed();</div><div class="line">        System.out.println(<span class="string">"end log:"</span> + joinPoint.getSignature().getName());</div><div class="line">        <span class="keyword">return</span> object;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="applicationContext-xml-4"><a href="#applicationContext-xml-4" class="headerlink" title="applicationContext.xml"></a>applicationContext.xml</h3><p>去掉原有信息，添加如下3行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;context:component-scan base-package=&quot;com.xqchen.aspect&quot;/&gt;</div><div class="line">&lt;context:component-scan base-package=&quot;com.xqchen.service&quot;/&gt;</div></pre></td></tr></table></figure>
+<p>扫描包com.xqchen.aspect和com.xqchen.service，定位业务类和切面类<br><figure class="highlight plain"><figcaption><span>```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">找到被注解了的切面类，进行切面配置</div><div class="line"></div><div class="line">```xml</div><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</div><div class="line">    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</div><div class="line">    xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</div><div class="line">    xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;</div><div class="line">    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</div><div class="line">    xsi:schemaLocation=&quot;</div><div class="line">   http://www.springframework.org/schema/beans </div><div class="line">   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/aop </div><div class="line">   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/tx </div><div class="line">   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd</div><div class="line">   http://www.springframework.org/schema/context      </div><div class="line">   http://www.springframework.org/schema/context/spring-context-3.0.xsd&quot;&gt;</div><div class="line">  </div><div class="line">    &lt;context:component-scan base-package=&quot;com.xqchen.aspect&quot;/&gt;</div><div class="line">    &lt;context:component-scan base-package=&quot;com.xqchen.service&quot;/&gt;</div><div class="line">    &lt;aop:aspectj-autoproxy/&gt;  </div><div class="line">   </div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="运行测试-2"><a href="#运行测试-2" class="headerlink" title="运行测试"></a>运行测试</h3><p><img src="http://stepimage.how2j.cn/4087.png" alt=""></p>
+<h2 id="SPRING-MVC"><a href="#SPRING-MVC" class="headerlink" title="SPRING MVC"></a>SPRING MVC</h2><p>待更新</p>
+<h2 id="注解方式测试"><a href="#注解方式测试" class="headerlink" title="注解方式测试"></a>注解方式测试</h2><h3 id="jar"><a href="#jar" class="headerlink" title="jar"></a>jar</h3><p>注解方式用到了junit,所以需要下载:<br>junit-4.12.jar和hamcrest-all-1.3.jar并导入到当前项目中。</p>
+<h3 id="TestSpring-4"><a href="#TestSpring-4" class="headerlink" title="TestSpring"></a>TestSpring</h3><p>修改TestSpring, 并运行</p>
+<ol>
+<li><p>@RunWith(SpringJUnit4ClassRunner.class)<br>表示这是一个Spring的测试类</p>
+</li>
+<li><p>@ContextConfiguration(“classpath:applicationContext.xml”)<br>定位Spring的配置文件</p>
+</li>
+<li><p>@Autowired<br>给这个测试类装配Category对象</p>
+</li>
+<li><p>@Test<br>测试逻辑，打印c对象的名称<br><img src="http://stepimage.how2j.cn/4489.png" alt=""></p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.xqchen.test;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> org.junit.Test;</div><div class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.ContextConfiguration;</div><div class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</div><div class="line"> </div><div class="line"><span class="keyword">import</span> com.xqchen.pojo.Category;</div><div class="line"> </div><div class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</div><div class="line"><span class="meta">@ContextConfiguration</span>(<span class="string">"classpath:applicationContext.xml"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSpring</span> </span>&#123;</div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    Category c;</div><div class="line"> </div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(c.getName());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>扫一扫，钱没了</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/pay/wechatpay.jpg" alt="xqchen WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/pay/alipay.jpg" alt="xqchen Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/spring/" rel="tag"># spring</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/05/2017-06-05-002/" rel="next" title="使用maven创建web项目">
+                <i class="fa fa-chevron-left"></i> 使用maven创建web项目
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="xqchen" />
+          <p class="site-author-name" itemprop="name">xqchen</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/chencn" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/chenxuq" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://how2j.cn?p=10016" title="how2j" target="_blank">how2j</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.mybatis.org/mybatis-3/zh/index.html" title="Mybatis" target="_blank">Mybatis</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://spring.cndocs.tk" title="Spring" target="_blank">Spring</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.kancloud.cn/ahutchen/spring-boot-reference-guide" title="Spring Boot" target="_blank">Spring Boot</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SPRING-教程"><span class="nav-number">1.</span> <span class="nav-text">SPRING 教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IOC-DI"><span class="nav-number">1.1.</span> <span class="nav-text">IOC/DI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pojo"><span class="nav-number">1.1.1.</span> <span class="nav-text">pojo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#applicationContext-xml"><span class="nav-number">1.1.2.</span> <span class="nav-text">applicationContext.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TestSpring"><span class="nav-number">1.1.3.</span> <span class="nav-text">TestSpring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原理图"><span class="nav-number">1.1.4.</span> <span class="nav-text">原理图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注入对象"><span class="nav-number">1.2.</span> <span class="nav-text">注入对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Product-java"><span class="nav-number">1.2.1.</span> <span class="nav-text">Product.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#applicationContext-xml-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">applicationContext.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TestSpring-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">TestSpring</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解方式-IOC-DI"><span class="nav-number">1.3.</span> <span class="nav-text">注解方式 IOC/DI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改applicationContext-xml"><span class="nav-number">1.3.1.</span> <span class="nav-text">修改applicationContext.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Autowired"><span class="nav-number">1.3.2.</span> <span class="nav-text">@Autowired</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行测试"><span class="nav-number">1.3.3.</span> <span class="nav-text">运行测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Autowired的位置"><span class="nav-number">1.3.4.</span> <span class="nav-text">@Autowired的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resource"><span class="nav-number">1.3.5.</span> <span class="nav-text">@Resource</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对Bean的注解"><span class="nav-number">1.3.6.</span> <span class="nav-text">对Bean的注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#applicationContext-xml-2"><span class="nav-number">1.3.7.</span> <span class="nav-text">applicationContext.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Component"><span class="nav-number">1.3.8.</span> <span class="nav-text">@Component</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行测试-1"><span class="nav-number">1.3.9.</span> <span class="nav-text">运行测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOP-面向切面编程"><span class="nav-number">1.4.</span> <span class="nav-text">AOP 面向切面编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路图"><span class="nav-number">1.5.</span> <span class="nav-text">思路图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备业务类-ProductService"><span class="nav-number">1.5.1.</span> <span class="nav-text">准备业务类 ProductService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TestSpring-2"><span class="nav-number">1.5.2.</span> <span class="nav-text">TestSpring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备日志切面-LoggerAspect"><span class="nav-number">1.5.3.</span> <span class="nav-text">准备日志切面 LoggerAspect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#applicationContext-xml-3"><span class="nav-number">1.5.4.</span> <span class="nav-text">applicationContext.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TestSpring-3"><span class="nav-number">1.5.5.</span> <span class="nav-text">TestSpring</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解方式-AOP"><span class="nav-number">1.6.</span> <span class="nav-text">注解方式 AOP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注解配置业务类"><span class="nav-number">1.6.1.</span> <span class="nav-text">注解配置业务类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#applicationContext-xml-4"><span class="nav-number">1.6.2.</span> <span class="nav-text">applicationContext.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行测试-2"><span class="nav-number">1.6.3.</span> <span class="nav-text">运行测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPRING-MVC"><span class="nav-number">1.7.</span> <span class="nav-text">SPRING MVC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解方式测试"><span class="nav-number">1.8.</span> <span class="nav-text">注解方式测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jar"><span class="nav-number">1.8.1.</span> <span class="nav-text">jar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TestSpring-4"><span class="nav-number">1.8.2.</span> <span class="nav-text">TestSpring</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xqchen</span>
+</div>
+
+
+<!--<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+-->
+<div class="powered-by">Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a><div>
+<!--
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">您是第</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      位贵宾
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "890c8d8243cb486e9230e7141b1e714f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
