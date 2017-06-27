@@ -1,0 +1,1337 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java,Mybatis," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Mybatis入门单独使用jdbc编程问题总结jdbc程序12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455Public static void main(String[] args) &amp;#123;Connection connection = n">
+<meta name="keywords" content="Java,Mybatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis 笔记">
+<meta property="og:url" content="http://yoursite.com/2017/06/27/2017-06-27-mybatis/index.html">
+<meta property="og:site_name" content="XQChen&#39;s Blog">
+<meta property="og:description" content="Mybatis入门单独使用jdbc编程问题总结jdbc程序12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455Public static void main(String[] args) &amp;#123;Connection connection = n">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4015767-5f32383be22e23ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4015767-d37440269514cad6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4015767-00292b9e136365e5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-06-27T15:27:18.748Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mybatis 笔记">
+<meta name="twitter:description" content="Mybatis入门单独使用jdbc编程问题总结jdbc程序12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455Public static void main(String[] args) &amp;#123;Connection connection = n">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4015767-5f32383be22e23ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/27/2017-06-27-mybatis/"/>
+
+
+
+
+
+  <title>Mybatis 笔记 | XQChen's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XQChen's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/27/2017-06-27-mybatis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xqchen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XQChen's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mybatis 笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-27T00:00:00+08:00">
+                2017-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">Mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/06/27/2017-06-27-mybatis/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Mybatis入门"><a href="#Mybatis入门" class="headerlink" title="Mybatis入门"></a><strong>Mybatis入门</strong></h1><h2 id="单独使用jdbc编程问题总结"><a href="#单独使用jdbc编程问题总结" class="headerlink" title="单独使用jdbc编程问题总结"></a>单独使用jdbc编程问题总结</h2><h3 id="jdbc程序"><a href="#jdbc程序" class="headerlink" title="jdbc程序"></a>jdbc程序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="function">Public <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">Connection connection = <span class="keyword">null</span>;</div><div class="line">PreparedStatement preparedStatement = <span class="keyword">null</span>;</div><div class="line">ResultSet resultSet = <span class="keyword">null</span>;</div><div class="line"></div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">	<span class="comment">//加载数据库驱动</span></div><div class="line">	Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</div><div class="line">	</div><div class="line">	<span class="comment">//通过驱动管理类获取数据库链接</span></div><div class="line">	connection =  DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8"</span>, <span class="string">"root"</span>, <span class="string">"mysql"</span>);</div><div class="line">	<span class="comment">//定义sql语句 ?表示占位符</span></div><div class="line">String sql = <span class="string">"select * from user where username = ?"</span>;</div><div class="line">	<span class="comment">//获取预处理statement</span></div><div class="line">	preparedStatement = connection.prepareStatement(sql);</div><div class="line">	<span class="comment">//设置参数，第一个参数为sql语句中参数的序号（从1开始），第二个参数为设置的参数值</span></div><div class="line">	preparedStatement.setString(<span class="number">1</span>, <span class="string">"王五"</span>);</div><div class="line">	<span class="comment">//向数据库发出sql执行查询，查询出结果集</span></div><div class="line">	resultSet =  preparedStatement.executeQuery();</div><div class="line">	<span class="comment">//遍历查询结果集</span></div><div class="line">	<span class="keyword">while</span>(resultSet.next())&#123;</div><div class="line">		System.out.println(resultSet.getString(<span class="string">"id"</span>)+<span class="string">"  "</span>+resultSet.getString(<span class="string">"username"</span>));</div><div class="line">	&#125;</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">	e.printStackTrace();</div><div class="line">&#125;<span class="keyword">finally</span>&#123;</div><div class="line">	<span class="comment">//释放资源</span></div><div class="line">	<span class="keyword">if</span>(resultSet!=<span class="keyword">null</span>)&#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			resultSet.close();</div><div class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">			<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span>(preparedStatement!=<span class="keyword">null</span>)&#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			preparedStatement.close();</div><div class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">			<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span>(connection!=<span class="keyword">null</span>)&#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			connection.close();</div><div class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">			<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上边使用jdbc的原始方法（未经封装）实现了查询数据库表记录的操作。</p>
+<h3 id="jdbc编程步骤："><a href="#jdbc编程步骤：" class="headerlink" title="jdbc编程步骤："></a>jdbc编程步骤：</h3><ol>
+<li>加载数据库驱动</li>
+<li>创建并获取数据库链接</li>
+<li>创建jdbc statement对象</li>
+<li>设置sql语句</li>
+<li>设置sql语句中的参数(使用preparedStatement)</li>
+<li>通过statement执行sql并获取结果</li>
+<li>对sql执行结果进行解析处理</li>
+<li>释放资源(resultSet、preparedstatement、connection)<a id="more"></a>
+</li>
+</ol>
+<h3 id="jdbc问题总结如下："><a href="#jdbc问题总结如下：" class="headerlink" title="jdbc问题总结如下："></a>jdbc问题总结如下：</h3><ol>
+<li>数据库链接创建、释放频繁造成系统资源浪费从而影响系统性能，如果使用数据库链接池可解决此问题。</li>
+<li>Sql语句在代码中硬编码，造成代码不易维护，实际应用sql变化的可能较大，sql变动需要改变java代码。</li>
+<li>使用preparedStatement向占有位符号传参数存在硬编码，因为sql语句的where条件不一定，可能多也可能少，修改sql还要修改代码，系统不易维护。</li>
+<li>对结果集解析存在硬编码（查询列名），sql变化导致解析代码变化，系统不易维护，如果能将数据库记录封装成pojo对象解析比较方便。</li>
+</ol>
+<h2 id="MyBatis介绍"><a href="#MyBatis介绍" class="headerlink" title="MyBatis介绍"></a>MyBatis介绍</h2><p>MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis，实质上Mybatis对ibatis进行一些改进。 </p>
+<p>MyBatis是一个优秀的持久层框架，它对jdbc的操作数据库的过程进行封装，使开发者只需要关注 SQL 本身，而不需要花费精力去处理例如注册驱动、创建connection、创建statement、手动设置参数、结果集检索等jdbc繁杂的过程代码。</p>
+<p>Mybatis通过xml或注解的方式将要执行的各种statement（statement、preparedStatemnt、CallableStatement）配置起来，并通过java对象和statement中的sql进行映射生成最终执行的sql语句，最后由mybatis框架执行sql并将结果映射成java对象并返回。</p>
+<h2 id="Mybatis架构"><a href="#Mybatis架构" class="headerlink" title="Mybatis架构"></a>Mybatis架构</h2><p><img src="http://upload-images.jianshu.io/upload_images/4015767-5f32383be22e23ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ol>
+<li><p>mybatis配置SqlMapConfig.xml，此文件作为mybatis的全局配置文件，配置了mybatis的运行环境等信息。mapper.xml文件即sql映射文件，文件中配置了操作数据库的sql语句。此文件需要在SqlMapConfig.xml中加载。</p>
+</li>
+<li><p>通过mybatis环境等配置信息构造SqlSessionFactory即会话工厂</p>
+</li>
+<li><p>由会话工厂创建sqlSession即会话，操作数据库需要通过sqlSession进行。</p>
+</li>
+<li><p>mybatis底层自定义了Executor执行器接口操作数据库，Executor接口有两个实现，一个是基本执行器、一个是缓存执行器。</p>
+</li>
+<li><p>Mapped Statement也是mybatis一个底层封装对象，它包装了mybatis配置信息及sql映射信息等。mapper.xml文件中一个sql对应一个Mapped Statement对象，sql的id即是Mapped statement的id。</p>
+</li>
+<li><p>Mapped Statement对sql执行输入参数进行定义，包括HashMap、基本类型、pojo，Executor通过Mapped Statement在执行sql前将输入的java对象映射至sql中，输入参数映射就是jdbc编程中对preparedStatement设置参数。</p>
+</li>
+<li><p>Mapped Statement对sql执行输出结果进行定义，包括HashMap、基本类型、pojo，Executor通过Mapped Statement在执行sql后将输出结果映射至java对象中，输出结果映射过程相当于jdbc编程中对结果的解析处理过程</p>
+</li>
+</ol>
+<h2 id="mybatis下载"><a href="#mybatis下载" class="headerlink" title="mybatis下载"></a>mybatis下载</h2><p>mybaits的代码由github.com管理，地址：<a href="https://github.com/mybatis/mybatis-3/release" target="_blank" rel="external">https://github.com/mybatis/mybatis-3/release</a><br><img src="http://upload-images.jianshu.io/upload_images/4015767-d37440269514cad6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li>mybatis-3.2.7.jar—-mybatis的核心包</li>
+<li>lib—-mybatis的依赖包</li>
+<li>mybatis-3.2.7.pdf—-mybatis使用手册</li>
+</ul>
+<h2 id="创建mysql数据库"><a href="#创建mysql数据库" class="headerlink" title="创建mysql数据库"></a>创建mysql数据库</h2><h2 id="Mybatis入门程序"><a href="#Mybatis入门程序" class="headerlink" title="Mybatis入门程序"></a>Mybatis入门程序</h2><h3 id="第一步：创建java工程"><a href="#第一步：创建java工程" class="headerlink" title="第一步：创建java工程"></a>第一步：创建java工程</h3><p>使用eclipse创建java工程</p>
+<h3 id="第二步：加入jar包"><a href="#第二步：加入jar包" class="headerlink" title="第二步：加入jar包"></a>第二步：加入jar包</h3><p>加入mybatis核心包、依赖包、数据驱动包。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4015767-00292b9e136365e5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h3 id="第三步：log4j-properties"><a href="#第三步：log4j-properties" class="headerlink" title="第三步：log4j.properties"></a>第三步：log4j.properties</h3><p>在classpath下创建log4j.properties如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># Global logging configuration</div><div class="line">log4j.rootLogger=DEBUG, stdout</div><div class="line"># Console output...</div><div class="line">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</div><div class="line">log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n</div></pre></td></tr></table></figure>
+<p>mybatis默认使用log4j作为输出日志信息。</p>
+<h3 id="第四步：SqlMapConfig-xml"><a href="#第四步：SqlMapConfig-xml" class="headerlink" title="第四步：SqlMapConfig.xml"></a>第四步：SqlMapConfig.xml</h3><p>在classpath下创建SqlMapConfig.xml，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE configuration</span></div><div class="line">PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</div><div class="line">"http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</div><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 和spring整合后 environments配置将废除--&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"development"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"development"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 使用jdbc事务管理--&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span> /&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 数据库连接池--&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"com.mysql.jdbc.Driver"</span> /&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8"</span> /&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"root"</span> /&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"mysql"</span> /&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">environment</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">environments</span>&gt;</span></div><div class="line">	</div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>SqlMapConfig.xml是mybatis核心配置文件，上边文件的配置内容为数据源、事务管理。</p>
+<h3 id="第五步：po类"><a href="#第五步：po类" class="headerlink" title="第五步：po类"></a>第五步：po类</h3><p>Po类作为mybatis进行sql映射使用，po类通常与数据库表对应，User.java如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Public class User &#123;</div><div class="line">	private int id;</div><div class="line">	private String username;// 用户姓名</div><div class="line">	private String sex;// 性别</div><div class="line">	private Date birthday;// 生日</div><div class="line">	private String address;// 地址</div><div class="line">get/set……</div></pre></td></tr></table></figure>
+<h3 id="第六步：程序编写"><a href="#第六步：程序编写" class="headerlink" title="第六步：程序编写"></a>第六步：程序编写</h3><h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><h5 id="映射文件"><a href="#映射文件" class="headerlink" title="映射文件"></a>映射文件</h5><p>在classpath下的sqlmap目录下创建sql映射文件Users.xml：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</div><div class="line">&lt;!DOCTYPE mapper</div><div class="line">PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</div><div class="line">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</div><div class="line">&lt;mapper namespace=&quot;test&quot;&gt;</div><div class="line">&lt;/mapper&gt;</div></pre></td></tr></table></figure>
+<p>namespace ：命名空间，用于隔离sql语句，后面会讲另一层非常重要的作用。</p>
+<p>在SqlMapConfig.xml中添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;!-- 根据id获取用户信息 --&gt;</div><div class="line">	&lt;select id=&quot;findUserById&quot; parameterType=&quot;int&quot; resultType=&quot;cn.itcast.mybatis.po.User&quot;&gt;</div><div class="line">		select * from user where id = #&#123;id&#125;</div><div class="line">	&lt;/select&gt;</div><div class="line">	&lt;!-- 自定义条件查询用户列表 --&gt;</div><div class="line">	&lt;select id=&quot;findUserByUsername&quot; parameterType=&quot;java.lang.String&quot; </div><div class="line">			resultType=&quot;cn.itcast.mybatis.po.User&quot;&gt;</div><div class="line">	   select * from user where username like &apos;%$&#123;value&#125;%&apos; </div><div class="line">	&lt;/select&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>parameterType：定义输入到sql中的映射类型，#{id}表示使用preparedstatement设置占位符号并将输入变量id传到sql。</li>
+<li>resultType：定义结果映射类型。</li>
+</ul>
+<h5 id="加载映射文件"><a href="#加载映射文件" class="headerlink" title="加载映射文件"></a>加载映射文件</h5><p>mybatis框架需要加载映射文件，将Users.xml添加在SqlMapConfig.xml，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;mappers&gt;</div><div class="line">		&lt;mapper resource=&quot;sqlmap/User.xml&quot;/&gt;</div><div class="line">&lt;/mappers&gt;</div></pre></td></tr></table></figure>
+<h5 id="测试程序："><a href="#测试程序：" class="headerlink" title="测试程序："></a>测试程序：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mybatis_first</span> </span>&#123;</div><div class="line">	</div><div class="line"><span class="comment">//会话工厂</span></div><div class="line"><span class="keyword">private</span> SqlSessionFactory sqlSessionFactory;</div><div class="line"></div><div class="line"><span class="meta">@Before</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createSqlSessionFactory</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">	<span class="comment">// 配置文件</span></div><div class="line">	String resource = <span class="string">"SqlMapConfig.xml"</span>;</div><div class="line">	InputStream inputStream = Resources.getResourceAsStream(resource);</div><div class="line"></div><div class="line">	<span class="comment">// 使用SqlSessionFactoryBuilder从xml配置文件中创建SqlSessionFactory</span></div><div class="line">	sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder()</div><div class="line">			.build(inputStream);</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 根据 id查询用户信息</span></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFindUserById</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">// 数据库会话实例</span></div><div class="line">	SqlSession sqlSession = <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		<span class="comment">// 创建数据库会话实例sqlSession</span></div><div class="line">		sqlSession = sqlSessionFactory.openSession();</div><div class="line">		<span class="comment">// 查询单个记录，根据用户id查询用户信息</span></div><div class="line">		User user = sqlSession.selectOne(<span class="string">"test.findUserById"</span>, <span class="number">10</span>);</div><div class="line">		<span class="comment">// 输出用户信息</span></div><div class="line">		System.out.println(user);</div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		<span class="keyword">if</span> (sqlSession != <span class="keyword">null</span>) &#123;</div><div class="line">			sqlSession.close();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 根据用户名称模糊查询用户信息</span></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFindUserByUsername</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">// 数据库会话实例</span></div><div class="line">	SqlSession sqlSession = <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		<span class="comment">// 创建数据库会话实例sqlSession</span></div><div class="line">		sqlSession = sqlSessionFactory.openSession();</div><div class="line">		<span class="comment">// 查询单个记录，根据用户id查询用户信息</span></div><div class="line">		List&lt;User&gt; list = sqlSession.selectList(<span class="string">"test.findUserByUsername"</span>, <span class="string">"张"</span>);</div><div class="line">		System.out.println(list.size());</div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		<span class="keyword">if</span> (sqlSession != <span class="keyword">null</span>) &#123;</div><div class="line">			sqlSession.close();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="和"><a href="#和" class="headerlink" title="#{}和${}"></a>#{}和${}</h5><p> #{}表示一个占位符号，通过#{}可以实现preparedStatement向占位符中设置值，自动进行java类型和jdbc类型转换，#{}可以有效防止sql注入。 #{}可以接收简单类型值或pojo属性值。 如果parameterType传输单个简单类型值，#{}括号中可以是value或其它名称。</p>
+<p>${}表示拼接sql串，通过${}可以将parameterType 传入的内容拼接在sql中且不进行jdbc类型转换， ${}可以接收简单类型值或pojo属性值，如果parameterType传输单个简单类型值，${}括号中只能是value。</p>
+<h5 id="parameterType和resultType"><a href="#parameterType和resultType" class="headerlink" title="parameterType和resultType"></a>parameterType和resultType</h5><ul>
+<li><p>parameterType：指定输入参数类型，mybatis通过ognl从输入对象中获取参数值拼接在sql中。</p>
+</li>
+<li><p>resultType：指定输出结果类型，mybatis将sql查询结果的一行记录数据映射为resultType指定类型的对象。</p>
+</li>
+</ul>
+<h5 id="selectOne和selectList"><a href="#selectOne和selectList" class="headerlink" title="selectOne和selectList"></a>selectOne和selectList</h5><p>selectOne查询一条记录，如果使用selectOne查询多条记录则抛出异常：</p>
+<blockquote>
+<p>org.apache.ibatis.exceptions.TooManyResultsException: Expected one result (or null) to be returned by selectOne(), but found: 3<br>    at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:70)</p>
+</blockquote>
+<p>selectList可以查询一条或多条记录。</p>
+<h4 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h4><h5 id="映射文件："><a href="#映射文件：" class="headerlink" title="映射文件："></a>映射文件：</h5><p>在SqlMapConfig.xml中添加：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 添加用户 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"insertUser"</span> <span class="attr">parameterType</span>=<span class="string">"cn.itcast.mybatis.po.User"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">selectKey</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span> <span class="attr">order</span>=<span class="string">"AFTER"</span> <span class="attr">resultType</span>=<span class="string">"java.lang.Integer"</span>&gt;</span></div><div class="line">		select LAST_INSERT_ID() </div><div class="line">	<span class="tag">&lt;/<span class="name">selectKey</span>&gt;</span></div><div class="line">	  insert into user(username,birthday,sex,address) </div><div class="line">	  values(#&#123;username&#125;,#&#123;birthday&#125;,#&#123;sex&#125;,#&#123;address&#125;)</div><div class="line">	<span class="tag">&lt;/<span class="name">insert</span>&gt;</span></div></pre></td></tr></table></figure>
+<h5 id="测试程序：-1"><a href="#测试程序：-1" class="headerlink" title="测试程序："></a>测试程序：</h5> <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">// 添加用户信息</span></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testInsert</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">// 数据库会话实例</span></div><div class="line">	SqlSession sqlSession = <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		<span class="comment">// 创建数据库会话实例sqlSession</span></div><div class="line">		sqlSession = sqlSessionFactory.openSession();</div><div class="line">		<span class="comment">// 添加用户信息</span></div><div class="line">		User user = <span class="keyword">new</span> User();</div><div class="line">		user.setUsername(<span class="string">"张小明"</span>);</div><div class="line">		user.setAddress(<span class="string">"河南郑州"</span>);</div><div class="line">		user.setSex(<span class="string">"1"</span>);</div><div class="line">		user.setPrice(<span class="number">1999.9f</span>);</div><div class="line">		sqlSession.insert(<span class="string">"test.insertUser"</span>, user);</div><div class="line">		<span class="comment">//提交事务</span></div><div class="line">		sqlSession.commit();</div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		<span class="keyword">if</span> (sqlSession != <span class="keyword">null</span>) &#123;</div><div class="line">			sqlSession.close();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="mysql自增主键返回"><a href="#mysql自增主键返回" class="headerlink" title="mysql自增主键返回"></a>mysql自增主键返回</h5><p>通过修改sql映射文件，可以将mysql自增主键返回：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"insertUser"</span> <span class="attr">parameterType</span>=<span class="string">"cn.itcast.mybatis.po.User"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- selectKey将主键返回，需要再返回 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">selectKey</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span> <span class="attr">order</span>=<span class="string">"AFTER"</span> <span class="attr">resultType</span>=<span class="string">"java.lang.Integer"</span>&gt;</span></div><div class="line">			select LAST_INSERT_ID()</div><div class="line">		<span class="tag">&lt;/<span class="name">selectKey</span>&gt;</span></div><div class="line">	   insert into user(username,birthday,sex,address)</div><div class="line">	    values(#&#123;username&#125;,#&#123;birthday&#125;,#&#123;sex&#125;,#&#123;address&#125;);</div><div class="line">	<span class="tag">&lt;/<span class="name">insert</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>添加selectKey实现将主键返回</li>
+<li>keyProperty:返回的主键存储在pojo中的哪个属性</li>
+<li>order：selectKey的执行顺序，是相对与insert语句来说，由于mysql的自增原理执行完insert语句之后才将主键生成，所以这里selectKey的执行顺序为after</li>
+<li>resultType:返回的主键是什么类型</li>
+<li>LAST_INSERT_ID():是mysql的函数，返回auto_increment自增列新记录id值。</li>
+</ul>
+<h5 id="Mysql使用-uuid实现主键"><a href="#Mysql使用-uuid实现主键" class="headerlink" title="Mysql使用 uuid实现主键"></a>Mysql使用 uuid实现主键</h5><p>需要增加通过select uuid()得到uuid值</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">insert</span>  <span class="attr">id</span>=<span class="string">"insertUser"</span> <span class="attr">parameterType</span>=<span class="string">"cn.itcast.mybatis.po.User"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">selectKey</span> <span class="attr">resultType</span>=<span class="string">"java.lang.String"</span> <span class="attr">order</span>=<span class="string">"BEFORE"</span> </span></div><div class="line"><span class="attr">keyProperty</span>=<span class="string">"id"</span>&gt;</div><div class="line">select uuid()</div><div class="line"><span class="tag">&lt;/<span class="name">selectKey</span>&gt;</span></div><div class="line">insert into user(id,username,birthday,sex,address) </div><div class="line">		 values(#&#123;id&#125;,#&#123;username&#125;,#&#123;birthday&#125;,#&#123;sex&#125;,#&#123;address&#125;)</div><div class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>注意这里使用的order是“BEFORE”</p>
+<h5 id="Oracle使用序列生成主键"><a href="#Oracle使用序列生成主键" class="headerlink" title="Oracle使用序列生成主键"></a>Oracle使用序列生成主键</h5><p>首先自定义一个序列且用于生成主键，selectKey使用如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">insert</span>  <span class="attr">id</span>=<span class="string">"insertUser"</span> <span class="attr">parameterType</span>=<span class="string">"cn.itcast.mybatis.po.User"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">selectKey</span> <span class="attr">resultType</span>=<span class="string">"java.lang.Integer"</span> <span class="attr">order</span>=<span class="string">"BEFORE"</span> </span></div><div class="line"><span class="attr">keyProperty</span>=<span class="string">"id"</span>&gt;</div><div class="line">SELECT 自定义序列.NEXTVAL FROM DUAL</div><div class="line"><span class="tag">&lt;/<span class="name">selectKey</span>&gt;</span></div><div class="line">insert into user(id,username,birthday,sex,address) </div><div class="line">		 values(#&#123;id&#125;,#&#123;username&#125;,#&#123;birthday&#125;,#&#123;sex&#125;,#&#123;address&#125;)</div><div class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>注意这里使用的order是“BEFORE”</p>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><h4 id="映射文件：-1"><a href="#映射文件：-1" class="headerlink" title="映射文件："></a>映射文件：</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 删除用户 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"deleteUserById"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></div><div class="line">		delete from user where id=#&#123;id&#125;</div><div class="line">	<span class="tag">&lt;/<span class="name">delete</span>&gt;</span></div></pre></td></tr></table></figure>
+<h5 id="测试程序：-2"><a href="#测试程序：-2" class="headerlink" title="测试程序："></a>测试程序：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 根据id删除用户</span></div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDelete</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">// 数据库会话实例</span></div><div class="line">		SqlSession sqlSession = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="comment">// 创建数据库会话实例sqlSession</span></div><div class="line">			sqlSession = sqlSessionFactory.openSession();</div><div class="line">			<span class="comment">// 删除用户</span></div><div class="line">			sqlSession.delete(<span class="string">"test.deleteUserById"</span>,<span class="number">18</span>);</div><div class="line">			<span class="comment">// 提交事务</span></div><div class="line">			sqlSession.commit();</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			<span class="keyword">if</span> (sqlSession != <span class="keyword">null</span>) &#123;</div><div class="line">				sqlSession.close();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h4 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h4><h5 id="映射文件-1"><a href="#映射文件-1" class="headerlink" title="映射文件"></a>映射文件</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 更新用户 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"updateUser"</span> <span class="attr">parameterType</span>=<span class="string">"cn.itcast.mybatis.po.User"</span>&gt;</span></div><div class="line">		update user set username=#&#123;username&#125;,birthday=#&#123;birthday&#125;,sex=#&#123;sex&#125;,address=#&#123;address&#125;</div><div class="line">		where id=#&#123;id&#125;</div><div class="line">	<span class="tag">&lt;/<span class="name">update</span>&gt;</span></div></pre></td></tr></table></figure>
+<h5 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a>测试程序</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 更新用户信息</span></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testUpdate</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="comment">// 数据库会话实例</span></div><div class="line">	SqlSession sqlSession = <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		<span class="comment">// 创建数据库会话实例sqlSession</span></div><div class="line">		sqlSession = sqlSessionFactory.openSession();</div><div class="line">		<span class="comment">// 添加用户信息</span></div><div class="line">		User user = <span class="keyword">new</span> User();</div><div class="line">		user.setId(<span class="number">16</span>);</div><div class="line">		user.setUsername(<span class="string">"张小明"</span>);</div><div class="line">		user.setAddress(<span class="string">"河南郑州"</span>);</div><div class="line">		user.setSex(<span class="string">"1"</span>);</div><div class="line">		user.setPrice(<span class="number">1999.9f</span>);</div><div class="line">		sqlSession.update(<span class="string">"test.updateUser"</span>, user);</div><div class="line">		<span class="comment">// 提交事务</span></div><div class="line">		sqlSession.commit();</div><div class="line"></div><div class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">		e.printStackTrace();</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		<span class="keyword">if</span> (sqlSession != <span class="keyword">null</span>) &#123;</div><div class="line">			sqlSession.close();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Mybatis解决jdbc编程的问题"><a href="#Mybatis解决jdbc编程的问题" class="headerlink" title="Mybatis解决jdbc编程的问题"></a>Mybatis解决jdbc编程的问题</h3><ol>
+<li>数据库链接创建、释放频繁造成系统资源浪费从而影响系统性能，如果使用数据库链接池可解决此问题。<blockquote>
+<p>解决：在SqlMapConfig.xml中配置数据链接池，使用连接池管理数据库链接。</p>
+</blockquote>
+</li>
+<li>Sql语句写在代码中造成代码不易维护，实际应用sql变化的可能较大，sql变动需要改变java代码。<blockquote>
+<p>解决：将Sql语句配置在XXXXmapper.xml文件中与java代码分离。</p>
+</blockquote>
+</li>
+<li>向sql语句传参数麻烦，因为sql语句的where条件不一定，可能多也可能少，占位符需要和参数一一对应。<blockquote>
+<p>解决：Mybatis自动将java对象映射至sql语句，通过statement中的parameterType定义输入参数的类型。</p>
+</blockquote>
+</li>
+<li>对结果集解析麻烦，sql变化导致解析代码变化，且解析前需要遍历，如果能将数据库记录封装成pojo对象解析比较方便。<blockquote>
+<p>解决：Mybatis自动将sql执行结果映射至java对象，通过statement中的resultType定义输出结果的类型。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="与hibernate不同"><a href="#与hibernate不同" class="headerlink" title="与hibernate不同"></a>与hibernate不同</h3><p>Mybatis和hibernate不同，它不完全是一个ORM框架，因为MyBatis需要程序员自己编写Sql语句，不过mybatis可以通过XML或注解方式灵活配置要运行的sql语句，并将java对象和sql语句映射生成最终执行的sql，最后将sql执行的结果再映射生成java对象。</p>
+<p>Mybatis学习门槛低，简单易学，程序员直接编写原生态sql，可严格控制sql执行性能，灵活度高，非常适合对关系数据模型要求不高的软件开发，例如互联网软件、企业运营类软件等，因为这类软件需求变化频繁，一但需求变化要求成果输出迅速。但是灵活的前提是mybatis无法做到数据库无关性，如果需要实现支持多种数据库的软件则需要自定义多套sql映射文件，工作量大。</p>
+<p>Hibernate对象/关系映射能力强，数据库无关性好，对于关系模型要求高的软件（例如需求固定的定制化软件）如果用hibernate开发可以节省很多代码，提高效率。但是Hibernate的学习门槛高，要精通门槛更高，而且怎么设计O/R映射，在性能和对象模型之间如何权衡，以及怎样用好Hibernate需要具有很强的经验和能力才行。<br>总之，按照用户的需求在有限的资源环境下只要能做出维护性、扩展性良好的软件架构都是好架构，所以框架只有适合才是最好。 </p>
+<h1 id="Dao开发方法"><a href="#Dao开发方法" class="headerlink" title="Dao开发方法"></a>Dao开发方法</h1><blockquote>
+<p> 未完待续</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>扫一扫，钱没了</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/pay/wechatpay.jpg" alt="xqchen WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/pay/alipay.jpg" alt="xqchen Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/Mybatis/" rel="tag"># Mybatis</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/13/2017-06-17-spring/" rel="next" title="Spring 教程">
+                <i class="fa fa-chevron-left"></i> Spring 教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="xqchen" />
+          <p class="site-author-name" itemprop="name">xqchen</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/chencn" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/chenxuq" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://how2j.cn?p=10016" title="how2j" target="_blank">how2j</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.mybatis.org/mybatis-3/zh/index.html" title="Mybatis" target="_blank">Mybatis</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://spring.cndocs.tk" title="Spring" target="_blank">Spring</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.kancloud.cn/ahutchen/spring-boot-reference-guide" title="Spring Boot" target="_blank">Spring Boot</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis入门"><span class="nav-number">1.</span> <span class="nav-text">Mybatis入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单独使用jdbc编程问题总结"><span class="nav-number">1.1.</span> <span class="nav-text">单独使用jdbc编程问题总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jdbc程序"><span class="nav-number">1.1.1.</span> <span class="nav-text">jdbc程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jdbc编程步骤："><span class="nav-number">1.1.2.</span> <span class="nav-text">jdbc编程步骤：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jdbc问题总结如下："><span class="nav-number">1.1.3.</span> <span class="nav-text">jdbc问题总结如下：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MyBatis介绍"><span class="nav-number">1.2.</span> <span class="nav-text">MyBatis介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mybatis架构"><span class="nav-number">1.3.</span> <span class="nav-text">Mybatis架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mybatis下载"><span class="nav-number">1.4.</span> <span class="nav-text">mybatis下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建mysql数据库"><span class="nav-number">1.5.</span> <span class="nav-text">创建mysql数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mybatis入门程序"><span class="nav-number">1.6.</span> <span class="nav-text">Mybatis入门程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步：创建java工程"><span class="nav-number">1.6.1.</span> <span class="nav-text">第一步：创建java工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步：加入jar包"><span class="nav-number">1.6.2.</span> <span class="nav-text">第二步：加入jar包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步：log4j-properties"><span class="nav-number">1.6.3.</span> <span class="nav-text">第三步：log4j.properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四步：SqlMapConfig-xml"><span class="nav-number">1.6.4.</span> <span class="nav-text">第四步：SqlMapConfig.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五步：po类"><span class="nav-number">1.6.5.</span> <span class="nav-text">第五步：po类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第六步：程序编写"><span class="nav-number">1.6.6.</span> <span class="nav-text">第六步：程序编写</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查询"><span class="nav-number">1.6.6.1.</span> <span class="nav-text">查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#映射文件"><span class="nav-number">1.6.6.1.1.</span> <span class="nav-text">映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加载映射文件"><span class="nav-number">1.6.6.1.2.</span> <span class="nav-text">加载映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#测试程序："><span class="nav-number">1.6.6.1.3.</span> <span class="nav-text">测试程序：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#和"><span class="nav-number">1.6.6.1.4.</span> <span class="nav-text">#{}和${}</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#parameterType和resultType"><span class="nav-number">1.6.6.1.5.</span> <span class="nav-text">parameterType和resultType</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#selectOne和selectList"><span class="nav-number">1.6.6.1.6.</span> <span class="nav-text">selectOne和selectList</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加"><span class="nav-number">1.6.6.2.</span> <span class="nav-text">添加</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#映射文件："><span class="nav-number">1.6.6.2.1.</span> <span class="nav-text">映射文件：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#测试程序：-1"><span class="nav-number">1.6.6.2.2.</span> <span class="nav-text">测试程序：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mysql自增主键返回"><span class="nav-number">1.6.6.2.3.</span> <span class="nav-text">mysql自增主键返回</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Mysql使用-uuid实现主键"><span class="nav-number">1.6.6.2.4.</span> <span class="nav-text">Mysql使用 uuid实现主键</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Oracle使用序列生成主键"><span class="nav-number">1.6.6.2.5.</span> <span class="nav-text">Oracle使用序列生成主键</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除"><span class="nav-number">1.6.7.</span> <span class="nav-text">删除</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#映射文件：-1"><span class="nav-number">1.6.7.1.</span> <span class="nav-text">映射文件：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#测试程序：-2"><span class="nav-number">1.6.7.1.1.</span> <span class="nav-text">测试程序：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改"><span class="nav-number">1.6.7.2.</span> <span class="nav-text">修改</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#映射文件-1"><span class="nav-number">1.6.7.2.1.</span> <span class="nav-text">映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#测试程序"><span class="nav-number">1.6.7.2.2.</span> <span class="nav-text">测试程序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mybatis解决jdbc编程的问题"><span class="nav-number">1.6.8.</span> <span class="nav-text">Mybatis解决jdbc编程的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与hibernate不同"><span class="nav-number">1.6.9.</span> <span class="nav-text">与hibernate不同</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dao开发方法"><span class="nav-number">2.</span> <span class="nav-text">Dao开发方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xqchen</span>
+</div>
+
+
+<!--<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+-->
+<div class="powered-by">Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a><div>
+<!--
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+-->
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">您是第</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      位贵宾
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "890c8d8243cb486e9230e7141b1e714f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
