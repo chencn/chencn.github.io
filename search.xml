@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[BootStrap 关于颜色的一些总结]]></title>
+    <url>%2F2017%2F07%2F11%2F2017-07-11-001%2F</url>
+    <content type="text"><![CDATA[BootStrap 关于颜色的一些总结 总结了一下，BootStrap颜色使用上其实有部分规律，一下分别列出，仅供参考注： BootStrap2和3可能颜色深浅度有部分差异；一下所述未经指明均为class属性 基本上 primary 使用蓝色 success 使用浅绿色 info 使用浅蓝色 warning 使用黄色 danger 使用褐色 然后 相应的 文本框 按钮在此扩展。 文本框(text) text-muted：提示，使用浅灰色（#999） text-primary：主要，使用蓝色（#428bca） text-success：成功，使用浅绿色(#3c763d) text-info：通知信息，使用浅蓝色（#31708f） text-warning：警告，使用黄色（#8a6d3b） text-danger：危险，使用褐色（#a94442） 按钮(button) btn btn-primary:提交按钮,使用蓝色（#428bca）btn btn-success：成功按钮,使用浅绿色(#3c763d)btn btn-info：信息按钮,使用浅蓝色（#31708f）btn btn-warning:警告按钮，使用黄色（#8a6d3b）btn btn-danger:危险按钮，使用褐色（#a94442） 表格 success 成功样式 使用浅绿色info 信息样式 使用浅蓝色warning 警告样式 使用黄色danger 危险样式 使用褐色 背景 bg-primary 强调的背景 使用蓝色bg-success 成功操作文字的背景 使用浅绿色bg-warning 警告提示文字的背景 使用黄色bg-danger 危险提示文字的背景 使用褐色]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+        <tag>BootStrap</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[JQuery显示、隐藏div的几种方法简明总结]]></title>
     <url>%2F2017%2F07%2F03%2F2017-07-03-001%2F</url>
     <content type="text"><![CDATA[JQuery显示、隐藏div的几种方法简明总结案例： 123$("#top_notice").css("display", "block");//第1种方法 //$("#top_notice").attr("style", "display:block;");//第2种方法 //$("#top_notice").show();//第3种方法 给元素换class，来实现隐藏div，前提是换的class样式定义好了隐藏属性1$("#sendPhoneNum").attr("class", "n_input3"); 然后给元素设置style属性 1$("#top_notice").attr("style", "display:block;"); 通过jquery的css方法，设置div隐藏1$("#sendPhoneNum").css("display", "none"); 通过jquery的show()、hide()方法，设置div隐藏12$("#textDiv").show();//显示div $("#imgDiv").hide();//隐藏div 在程序设计中经常用到div的显示和隐藏，下面总结几种方法： 1&lt;div id='demo'&gt;示例&lt;/div&gt; 12345678910111213141、 $("#demo").attr("style", "display:none;"); //隐藏div$("#demo").attr("style", "display:block;"); //显示div2、 $("#demo").css("display", "none"); //隐藏div$("#demo").css("display", "block"); //显示div3、 $("#demo").hide(); //隐藏div$("#demo").show(); //显示div4、 $("#demo").toggle( function() &#123; $(this).attr("style", "display:none;"); //隐藏div &#125;, function() &#123; $(this).attr("style", "display:block;"); //显示div &#125;); 使用js的方法 可以先让一个div隐藏： 1&lt;div id="hiddenDiv" style="display:none;"&gt;这里是内容&lt;/div&gt; 然后写一个控制的按钮 1&lt;a href="#" onclick="blockDiv()"&gt;点击显示或隐藏&lt;/a&gt; 然后写js： 123456789&lt;script type="text/javascript"&gt; function blockDiv() &#123; var div = document.getElementById("hiddenDiv").style.display; if(div == 'none') &#123; document.getElementById("hiddenDiv").style.display = 'block'; &#125; else &#123; document.getElementById("hiddenDiv").style.display = 'none'; &#125;&lt;/script&gt;]]></content>
